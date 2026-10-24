@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#131a2c">
+<link rel="manifest" href="manifest.json"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
+<title>MINNOVATE Site Expenses</title>
+<style>
+:root{--navy:#131a2c;--navy2:#1d2742;--sun:linear-gradient(135deg,#fdc72a,#ff7a14 60%,#ff4a1c);--or:#ff7a14;--bg:#eef1f6;--ink:#18203a;--mut:#6b7590;--in:#14907f;--out:#e8590c;--line:#dfe4ee}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+body{font:15px/1.4 "Nunito","Avenir Next","Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--ink);padding-bottom:110px}
+header{background:var(--navy);padding:calc(10px + env(safe-area-inset-top)) 16px 10px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:5}
+header img{height:30px}header .sp{flex:1}
+select,input,button{font:inherit;color:inherit}
+header select{background:var(--navy2);color:#fff;border:0;border-radius:8px;padding:6px 8px}
+.badge{font-size:12px;font-weight:700;padding:4px 10px;border-radius:99px;background:var(--navy2);color:#c9d1e8}
+.badge.w{background:#ff7a14;color:#fff}.badge.o{background:#4a2a2a;color:#ffb4a2}
+main{max-width:560px;margin:0 auto;padding:0 14px}
+.hero{background:var(--navy);color:#fff;margin:0 -14px;padding:14px 20px 22px;border-radius:0 0 26px 26px}
+.mn{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.mn button{background:var(--navy2);border:0;color:#fff;width:36px;height:36px;border-radius:50%;font-size:18px}
+.mn b{font-size:16px}.chip{font-size:11px;font-weight:800;padding:2px 8px;border-radius:99px;margin-left:6px;background:#26314f;color:#c9d1e8}.chip.s{background:var(--in);color:#fff}
+.big{font-size:44px;font-weight:800;letter-spacing:-1px;font-variant-numeric:tabular-nums;background:var(--sun);-webkit-background-clip:text;background-clip:text;color:transparent}
+.big.neg{background:none;color:#ff6b5a}.lbl{font-size:13px;color:#9aa5c4}
+.bar{height:8px;border-radius:9px;background:#26314f;margin:14px 0}.bar i{display:block;height:100%;border-radius:9px;background:var(--sun)}
+.st{display:flex;justify-content:space-between;font-variant-numeric:tabular-nums}.st div{font-size:12px;color:#9aa5c4}.st b{display:block;font-size:16px;color:#fff}
+.tabs{display:flex;background:#fff;border-radius:12px;padding:4px;margin:16px 0 10px}
+.tabs button{flex:1;border:0;background:none;padding:9px;border-radius:9px;font-weight:700;color:var(--mut)}.tabs .on{background:var(--navy);color:#fff}
+.row{background:#fff;border-radius:14px;padding:12px 14px;margin-bottom:8px;display:flex;gap:12px;align-items:center;border-left:5px solid var(--out)}
+.row.received{border-color:var(--in)}.row .d{font-size:12px;color:var(--mut);min-width:44px;text-align:center;font-weight:700}
+.row .m{flex:1;min-width:0}.row .m b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.row small{color:var(--mut)}
+.row a{color:var(--or);font-weight:700;text-decoration:none}.amt{font-weight:800;font-variant-numeric:tabular-nums}
+.x{border:0;background:none;color:#b7bfd3;font-size:18px;padding:4px}.tag{font-size:11px;background:#fff1e6;color:var(--out);border-radius:6px;padding:1px 6px;margin-left:4px}
+.empty{text-align:center;color:var(--mut);padding:30px 10px}
+.fab{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom));width:60px;height:60px;border-radius:50%;border:0;background:var(--sun);color:#fff;font-size:34px;box-shadow:0 8px 20px #ff7a1466;z-index:6}
+.sub{display:block;width:100%;margin-top:6px;padding:13px;border-radius:12px;border:2px solid var(--navy);background:none;font-weight:800;color:var(--navy)}
+.modal{position:fixed;inset:0;background:#0a0f1e99;display:none;align-items:flex-end;justify-content:center;z-index:9}.modal.on{display:flex}
+.sheet{background:#fff;width:100%;max-width:560px;border-radius:24px 24px 0 0;padding:18px 18px calc(18px + env(safe-area-inset-bottom));max-height:92vh;overflow:auto;animation:up .2s}
+@keyframes up{from{transform:translateY(40px);opacity:.5}}@media(prefers-reduced-motion:reduce){.sheet{animation:none}}
+.sheet h3{margin-bottom:12px}.seg{display:flex;gap:8px;margin-bottom:12px}
+.seg button{flex:1;padding:10px;border-radius:10px;border:2px solid var(--line);background:#fff;font-weight:800}.seg .on{border-color:var(--or);background:#fff4ea}
+label{display:block;font-size:13px;font-weight:700;color:var(--mut);margin:10px 0 4px}
+.f{width:100%;padding:12px;border:2px solid var(--line);border-radius:10px;background:#fff}.f:focus,button:focus-visible{outline:3px solid #ff7a1466;border-color:var(--or)}
+.go{width:100%;margin-top:16px;padding:14px;border:0;border-radius:12px;background:var(--sun);color:#fff;font-weight:800;font-size:16px}.go:disabled{opacity:.5}
+.ghost{width:100%;margin-top:8px;padding:12px;border:0;background:none;color:var(--mut);font-weight:700}
+.err{background:#ffe9e6;color:#b3261e;padding:10px;border-radius:10px;margin:10px 0;font-size:13px}
+.login{text-align:center;padding:60px 20px}.login img{width:260px;max-width:80%;margin-bottom:24px}#gb{display:flex;justify-content:center;margin-top:18px}
+.pv{max-width:100%;max-height:160px;border-radius:10px;margin-top:8px}
+.sum p{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--line)}
+</style></head><body>
+<header><img src="minnovate-logo.png" alt="MINNOVATE"><span class="sp"></span><span id="sel"></span><span id="bd" class="badge"></span></header>
+<main id="v"></main>
+<div id="m" class="modal"></div>
+<script src="https://accounts.google.com/gsi/client" async defer onload="gis()"></script>
+<script>
+// ---- SETTINGS: fill these two after deploying the backend ----
+const API='PASTE_APPS_SCRIPT_WEB_APP_URL', CID='PASTE_YOUR_CLIENT_ID.apps.googleusercontent.com';
+const $=s=>document.querySelector(s),fmt=n=>Math.round(n).toLocaleString('en-US');
+const today=()=>new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10);
+let S={q:[],d:[],entries:[],months:[],heads:[],sites:[],user:null,site:'',month:today().slice(0,7),tab:'expense',busy:0,need:0,err:''},P='';
+const db=new Promise(r=>{const o=indexedDB.open('se',1);o.onupgradeneeded=()=>o.result.createObjectStore('k');o.onsuccess=()=>r(o.result)});
+const idb=async(m,k,v)=>{const d=await db;return new Promise(r=>{const s=d.transaction('k',m=='get'?'readonly':'readwrite').objectStore('k'),q=m=='get'?s.get(k):s.put(v,k);q.onsuccess=()=>r(q.result)})};
+const persist=()=>Promise.all([idb('set','q',S.q),idb('set','d',S.d),idb('set','c',{user:S.user,sites:S.sites,heads:S.heads,entries:S.entries,months:S.months})]);
+const tok=()=>{try{const k=JSON.parse(localStorage.tok);return k.e>Date.now()+6e4?k.t:null}catch(e){return null}};
+function onCred(r){const p=JSON.parse(atob(r.credential.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));localStorage.tok=JSON.stringify({t:r.credential,e:p.exp*1000});S.err='';sync()}
+function gis(){google.accounts.id.initialize({client_id:CID,callback:onCred,auto_select:true});btn()}
+function btn(){const g=$('#gb');if(g&&window.google&&google.accounts)google.accounts.id.renderButton(g,{theme:'filled_black',size:'large',shape:'pill'})}
+async function api(a,d){const r=await(await fetch(API,{method:'POST',body:JSON.stringify({token:tok(),action:a,...d})})).json();if(r.error)throw new Error(r.error);return r}
+async function sync(){
+  if(!navigator.onLine||S.busy)return render();
+  if(!tok()){S.need=1;if(window.google&&google.accounts)google.accounts.id.prompt();return render()}
+  S.busy=1;S.need=0;render();
+  try{
+    if(S.d.length){await api('del',{ids:S.d});S.d=[]}
+    if(S.q.length){const r=await api('add',{items:S.q});S.q=S.q.filter(x=>!r.done.includes(x.id))}
+    Object.assign(S,await api('load'));if(!S.sites.includes(S.site))S.site=S.sites[0];S.err=''
+  }catch(e){S.err=e.message;if(/token|sign/i.test(S.err)){localStorage.removeItem('tok');S.need=1}}
+  S.busy=0;await persist();render();
+}
+const all=()=>{const g=new Set(S.d);return S.entries.filter(e=>!g.has(e.id)).concat(S.q.map(e=>({...e,pending:1}))).filter(e=>e.site===S.site)};
+const locked=()=>S.months.some(m=>m.site===S.site&&m.month===S.month&&m.status==='submitted');
+const mgr=()=>S.user&&S.user.role==='manager';
+const sum=(a,t)=>a.filter(e=>e.type===t).reduce((s,e)=>s+Number(e.amount),0);
+function calc(){const E=all(),mo=E.filter(e=>e.date.slice(0,7)===S.month),pv=E.filter(e=>e.date.slice(0,7)<S.month),
+  op=sum(pv,'received')-sum(pv,'expense'),rc=sum(mo,'received'),sp=sum(mo,'expense');return{mo,op,rc,sp,rem:op+rc-sp}}
+const mv=d=>{const[y,m]=S.month.split('-').map(Number),t=new Date(y,m-1+d,1);S.month=t.getFullYear()+'-'+String(t.getMonth()+1).padStart(2,'0');render()};
+const mlabel=()=>{const[y,m]=S.month.split('-').map(Number);return new Date(y,m-1).toLocaleString('en',{month:'long',year:'numeric'})};
+function render(){
+  const n=S.q.length+S.d.length,b=$('#bd');
+  b.className='badge'+(!navigator.onLine?' o':n?' w':'');b.textContent=!navigator.onLine?'Offline'+(n?' · '+n+' waiting':''):S.busy?'Syncing…':n?n+' waiting':'Synced';
+  $('#sel').innerHTML=S.sites.length>1?'<select onchange="S.site=this.value;render()">'+S.sites.map(s=>`<option ${s==S.site?'selected':''}>${s}</option>`).join('')+'</select>':'';
+  if(!S.user){$('#v').innerHTML=`<div class="login"><img src="minnovate-logo.png" alt=""><h2>Site expenses</h2><p class="lbl" style="color:var(--mut)">Sign in with your Google account to log payments and expenses.</p>${S.err?`<div class="err">${S.err}</div>`:''}<div id="gb"></div></div>`;return btn()}
+  const c=calc(),L=locked(),pct=Math.min(100,(c.op+c.rc)>0?c.sp/(c.op+c.rc)*100:100),list=c.mo.filter(e=>e.type===S.tab).sort((a,b)=>b.date.localeCompare(a.date));
+  $('#v').innerHTML=`<div class="hero"><div class="mn"><button onclick="mv(-1)" aria-label="Previous month">‹</button><b>${mlabel()}<span class="chip ${L?'s':''}">${L?'Submitted':'Open'}</span></b><button onclick="mv(1)" aria-label="Next month">›</button></div>
+  <div class="lbl">Remaining · ${S.site}</div><div class="big ${c.rem<0?'neg':''}">${c.rem<0?'−':''}${fmt(Math.abs(c.rem))}</div>
+  <div class="bar"><i style="width:${pct}%"></i></div>
+  <div class="st"><div><b>${fmt(c.op)}</b>Opening</div><div><b>${fmt(c.rc)}</b>Received</div><div><b>${fmt(c.sp)}</b>Spent</div></div></div>
+  ${S.need?`<div class="err">Sign in again to sync ${S.q.length+S.d.length} waiting entries.<div id="gb" style="margin-top:8px"></div></div>`:''}${S.err&&!S.need?`<div class="err">${S.err}</div>`:''}
+  <div class="tabs"><button class="${S.tab=='expense'?'on':''}" onclick="S.tab='expense';render()">Expenses</button><button class="${S.tab=='received'?'on':''}" onclick="S.tab='received';render()">Received</button></div>
+  ${list.map(e=>`<div class="row ${e.type}"><div class="d">${new Date(e.date+'T00:00').toLocaleString('en',{day:'2-digit',month:'short'})}</div><div class="m"><b>${esc(e.details)}</b><small>${esc(e.head||'Payment received')}${e.pending?'<span class="tag">waiting</span>':''}${e.noReceipt?'<span class="tag">no receipt</span>':''} ${e.receipt?`<a href="${e.receipt}" target="_blank">Receipt</a>`:''}</small></div><div class="amt">${fmt(e.amount)}</div>${!L||mgr()?`<button class="x" aria-label="Delete" onclick="del('${e.id}')">✕</button>`:''}</div>`).join('')||`<div class="empty">${S.tab=='expense'?'No expenses yet this month. Tap + when you spend.':'No payments received this month.'}</div>`}
+  ${L?(mgr()?'<button class="sub" onclick="reopen()">Reopen this month</button>':''):'<button class="sub" onclick="subm()">Submit month to manager</button>'}
+  <button class="ghost" onclick="out()">Sign out ${esc(S.user.name||'')}</button>
+  ${L&&!mgr()?'':'<button class="fab" aria-label="Add entry" onclick="add()">+</button>'}`;
+  if(S.need)btn()
+}
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function del(id){if(!confirm('Delete this entry?'))return;const i=S.q.findIndex(x=>x.id===id);if(i>=0)S.q.splice(i,1);else S.d.push(id);persist();render();sync()}
+function out(){if(S.q.length&&!confirm(S.q.length+' entries are not synced yet and will be lost. Sign out anyway?'))return;localStorage.clear();idb('set','c',null);idb('set','q',[]);idb('set','d',[]);location.reload()}
+// ---- add entry ----
+let T='expense';
+function add(){T=S.tab;P='';const m=$('#m');m.className='modal on';m.innerHTML=`<div class="sheet"><h3>New entry</h3>
+<div class="seg"><button id="t1" onclick="tt('expense')">Expense</button><button id="t2" onclick="tt('received')">Payment received</button></div>
+<label>Date</label><input class="f" id="fd" type="date" value="${today()}">
+<label>Amount</label><input class="f" id="fa" type="number" inputmode="decimal" placeholder="0">
+<label>Details</label><input class="f" id="fx" list="dl" placeholder="e.g. Fuel for official bike" autocomplete="off"><datalist id="dl">${[...new Set(S.entries.map(e=>e.details))].slice(-60).map(d=>`<option value="${esc(d)}">`).join('')}</datalist>
+<div id="xp"><label>Account head</label><select class="f" id="fh" onchange="nh(this)">${S.heads.map(h=>`<option>${esc(h)}</option>`).join('')}<option value="+">+ Add new head…</option></select>
+<label>Receipt</label><input class="f" id="fp" type="file" accept="image/*" capture="environment" onchange="ph(this)"><img id="pv" class="pv" hidden>
+<label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="fs" checked> Clean scan (black &amp; white)</label>
+<label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="fn" onchange="$('#fp').disabled=this.checked"> No receipt for this expense</label></div>
+<div class="err" id="fe" hidden></div><button class="go" onclick="saveE()">Save entry</button><button class="ghost" onclick="cl()">Cancel</button></div>`;tt(T)}
+function tt(t){T=t;$('#t1').className=t=='expense'?'on':'';$('#t2').className=t=='received'?'on':'';$('#xp').hidden=t!='expense'}
+const cl=()=>$('#m').className='modal';
+function nh(s){if(s.value!='+')return;const h=(prompt('New account head name')||'').trim();if(h){if(!S.heads.includes(h))S.heads.push(h);s.insertAdjacentHTML('afterbegin',`<option>${esc(h)}</option>`);s.value=h}else s.selectedIndex=0}
+function ph(i){const f=i.files[0];if(!f)return;const im=new Image();im.onload=()=>{const k=Math.min(1,1400/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*k;c.height=im.height*k;const x=c.getContext('2d');if($('#fs').checked)x.filter='grayscale(1) contrast(1.5) brightness(1.1)';x.drawImage(im,0,0,c.width,c.height);P=c.toDataURL('image/jpeg',.6);$('#pv').src=P;$('#pv').hidden=false};im.src=URL.createObjectURL(f)}
+function saveE(){
+  const a=Number($('#fa').value),x=$('#fx').value.trim(),e=$('#fe'),ex=T=='expense',ns=ex&&$('#fn').checked;
+  const bad=!a||a<=0?'Enter the amount.':!x?'Enter the details.':ex&&!P&&!ns?'Add a receipt photo, or tick "No receipt".':'';
+  if(bad){e.textContent=bad;e.hidden=false;return}
+  const d=$('#fd').value;
+  S.q.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,8),site:S.site,date:d,type:T,amount:a,details:x,head:ex?$('#fh').value:'',photo:ex&&!ns?P:'',noReceipt:ns,by:S.user.email});
+  S.month=d.slice(0,7);S.tab=T;cl();persist();render();sync()
+}
+// ---- submit month ----
+function subm(){const c=calc(),nr=c.mo.filter(e=>e.noReceipt).length,m=$('#m');m.className='modal on';
+  m.innerHTML=`<div class="sheet"><h3>Submit ${mlabel()}?</h3><div class="sum"><p><span>Entries</span><b>${c.mo.length}</b></p><p><span>Received</span><b>${fmt(c.rc)}</b></p><p><span>Spent</span><b>${fmt(c.sp)}</b></p><p><span>Remaining</span><b>${fmt(c.rem)}</b></p><p><span>Without receipt</span><b>${nr}</b></p></div>
+  <p style="margin-top:12px">Is this final? After you submit, you can't edit this month. Only the manager can reopen it.</p>
+  ${S.q.length||S.d.length||!navigator.onLine?'<div class="err">Connect to the internet and wait for all entries to sync before submitting.</div>':''}
+  <button class="go" ${S.q.length||S.d.length||!navigator.onLine?'disabled':''} onclick="doSub('submit')">Yes, submit</button><button class="ghost" onclick="cl()">Not yet</button></div>`}
+async function doSub(a){try{await api(a,{site:S.site,month:S.month});cl();S.busy=0;await sync()}catch(e){cl();S.err=e.message;render()}}
+const reopen=()=>confirm('Reopen '+mlabel()+' for editing?')&&doSub('reopen');
+// ---- boot ----
+(async()=>{
+  if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js');
+  const[c,q,d]=await Promise.all([idb('get','c'),idb('get','q'),idb('get','d')]);
+  if(c){Object.assign(S,c);S.site=S.sites[0]||S.user.site}S.q=q||[];S.d=d||[];render();sync();
+  addEventListener('online',sync);addEventListener('offline',render);
+})();
+</script></body></html>
