@@ -54,7 +54,7 @@ label{display:block;font-size:13px;font-weight:700;color:var(--mut);margin:10px 
 <script src="https://accounts.google.com/gsi/client" async defer onload="gis()"></script>
 <script>
 // ---- SETTINGS: fill these two after deploying the backend ----
-const API='PASTE_APPS_SCRIPT_WEB_APP_URL', CID='PASTE_YOUR_CLIENT_ID.apps.googleusercontent.com';
+const API='https://script.google.com/macros/s/AKfycbzSlRioCxe9fxSdlGviH2rv9JJLNIkOYUp1F3HQncT0AZWlWdNxnvQpKgj-Cli-wVlETg/exec', CID='500099880593-9073r9v0phh07i61en8dts6i5vrvh1nr.apps.googleusercontent.com';
 const $=s=>document.querySelector(s),fmt=n=>Math.round(n).toLocaleString('en-US');
 const today=()=>new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10);
 let S={q:[],d:[],entries:[],months:[],heads:[],sites:[],user:null,site:'',month:today().slice(0,7),tab:'expense',busy:0,need:0,err:''},P='';
